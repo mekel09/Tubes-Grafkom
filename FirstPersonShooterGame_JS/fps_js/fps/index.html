@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>First Person Shooter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  src="../libs/three.js"></script>
+    <script  src="../libs/jquery-1.9.0.js"></script>
+    <script  src="../libs/stats.js"></script>
+    <script  src="../libs/dat.gui.js"></script>
+    <script  src="../libs/PointerLockControls.js"></script>
+    <script  src="../libs/OBJLoader.js"></script>
+    <script  src="../libs/MTLLoader.js"></script>
+    <script  src="../libs/physi.js"></script>
+    <script  src="../libs/howler.js"></script>
+    <script  src="Map.js"></script>
+    <script  src="Enemies.js"></script>
+    <script  src="Skybox.js"></script>
+    <script  src="Crosshair.js"></script>
+    <script  src="Avatar.js"></script> 
+    <script  src="Bullets.js"></script> 
+    <script  src="Scene.js"></script>
+    <script  src="Script.js"></script>
+
+    <div id="blocker">
+        <div id="instructions">
+            <span id="title" style="font-size:50px">Click to start</span>
+            <br />
+            The game will be over when you run out of ammo
+            <br />
+            W, A, S, D = Move
+            <br />
+            Click Left = Shoot
+            <br />
+            Move Mouse = Look
+            <br />
+            Esc = Pause
+        </div>
+    </div>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden; 
+            cursor: none;
+        }
+
+        #blocker {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        #instructions {
+            width: 100%;
+            height: 100%;
+
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+</body>
+</html>
