@@ -66,15 +66,11 @@ class Map {
     mountain.autoUpdateMatrix = false;
     this.map.push(mountain);
     ++this.map_size;
-
-
     return this;
   }
-
   getMap(i) {
     return this.map[i];
   }
-
   getMapSize() {
     return this.map_size;
   }
