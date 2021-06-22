@@ -1,7 +1,7 @@
 class TheScene extends Physijs.Scene {
-  constructor (renderer, aCamera) {
+  constructor(renderer, aCamera) {
     super();
-    this.setGravity(new THREE.Vector3 (0, -50, 0));
+    this.setGravity(new THREE.Vector3(0, -50, 0));
     this.camera = aCamera;
     this.createCrosshair(renderer);
     this.avatar = null;
@@ -31,7 +31,7 @@ class TheScene extends Physijs.Scene {
 
     this.add(this.place);
   }
-  
+
   createHUD() {
     var score = document.createElement('div');
     score.id = "score";
@@ -39,9 +39,9 @@ class TheScene extends Physijs.Scene {
     score.style.width = 1;
     score.style.height = 1;
     score.innerHTML = "Score: " + this.score;
-    score.style.top = 100 + 'px';
-    score.style.left = 100 + 'px';
-    score.style.fontSize = 100 + 'px';
+    score.style.top = 50 + 'px';
+    score.style.left = 50 + 'px';
+    score.style.fontSize = 50 + 'px';
     score.style.color = "white";
     document.body.appendChild(score);
 
@@ -50,10 +50,10 @@ class TheScene extends Physijs.Scene {
     ammo.style.position = 'absolute';
     ammo.style.width = 1;
     ammo.style.height = 1;
-    ammo.innerHTML = "Ammo: " + this.actualAmmo;
-    ammo.style.top = 200 + 'px';
-    ammo.style.left = 100 + 'px';
-    ammo.style.fontSize = 100 + 'px';
+    ammo.innerHTML = "Ammunation: " + this.actualAmmo;
+    ammo.style.top = 100 + 'px';
+    ammo.style.left = 50 + 'px';
+    ammo.style.fontSize = 50 + 'px';
     ammo.style.color = "white";
     document.body.appendChild(ammo);
 
@@ -63,19 +63,19 @@ class TheScene extends Physijs.Scene {
     level.style.width = 1;
     level.style.height = 1;
     level.innerHTML = "Level: " + this.level;
-    level.style.top = 300 + 'px';
-    level.style.left = 100 + 'px';
-    level.style.fontSize = 100 + 'px';
+    level.style.top = 150 + 'px';
+    level.style.left = 50 + 'px';
+    level.style.fontSize = 50 + 'px';
     level.style.color = "white";
     document.body.appendChild(level);
   }
 
   updateAmmo() {
     var text = document.getElementById("ammo");
-    text.innerHTML = "Ammo: " + this.actualAmmo;
+    text.innerHTML = "Ammunation: " + this.actualAmmo;
   }
 
-  updateScore(newScore){
+  updateScore(newScore) {
     var text = document.getElementById("score");
     this.score += newScore;
     text.innerHTML = "Score: " + this.score;
@@ -88,15 +88,19 @@ class TheScene extends Physijs.Scene {
 
   createCrosshair(renderer) {
     var crosshair = new Crosshair();
-    this.camera.add( crosshair );
+    this.camera.add(crosshair);
+
+    var crosshair2 = new Crosshair2();
+    this.camera.add(crosshair2);
 
     var crosshairX = 50;
     var crosshairY = 50;
     crosshair.position.set((crosshairX / 100) * 2 - 1, (crosshairY / 100) * 2 - 1, -0.3);
+    crosshair2.position.set((crosshairX / 100) * 2 - 1, (crosshairY / 100) * 2 - 1, -0.3);
   }
 
   shooter() {
-    if(this.index >= this.maxBullets) {
+    if (this.index >= this.maxBullets) {
       this.index = 0;
       this.bullets.reload();
     }
@@ -107,22 +111,22 @@ class TheScene extends Physijs.Scene {
       this.updateAmmo();
     }
   }
-  
+
   createLights() {
-    this.ambientLight = new THREE.AmbientLight(0xccddee, 0.35);
-    this.add (this.ambientLight);
-    
-    this.spotLight = new THREE.SpotLight( 0xffffff );
-    this.spotLight.position.set( 0, 500, 1000 );
+    this.ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    this.add(this.ambientLight);
+
+    this.spotLight = new THREE.SpotLight(0xffffff);
+    this.spotLight.position.set(0, 500, 1000);
     this.spotLight.intensity = 1;
     this.spotLight.castShadow = true;
-    this.spotLight.shadow.mapSize.width=2048;
-    this.spotLight.shadow.mapSize.height=2048;
-    this.add (this.spotLight);
+    this.spotLight.shadow.mapSize.width = 2048;
+    this.spotLight.shadow.mapSize.height = 2048;
+    this.add(this.spotLight);
   }
-  
+
   createPlace() {
-    var place = new THREE.Object3D();    
+    var place = new THREE.Object3D();
 
     this.skybox = new Skybox();
     place.add(this.skybox);
@@ -140,8 +144,8 @@ class TheScene extends Physijs.Scene {
 
   createBullets() {
     var loader = new THREE.TextureLoader();
-    var texturPelor = loader.load ("imgs/bullettext.jpg");
-    this.bullets = new Bullets(this.maxBullets, this, (new THREE.MeshPhongMaterial ({map: texturPelor})));
+    var texturPelor = loader.load("imgs/bullettext.jpg");
+    this.bullets = new Bullets(this.maxBullets, this, (new THREE.MeshPhongMaterial({ map: texturPelor })));
   }
 
   createEnemies() {
@@ -151,12 +155,12 @@ class TheScene extends Physijs.Scene {
   endGame() {
     enableControls = false;
     controls.enabled = false;
-    
+
     moveForward = false;
     moveBackward = false;
     moveLeft = false;
     moveRight = false;
-   
+
 
     blocker.style.display = 'block';
     instructions.style.display = '';
@@ -164,8 +168,8 @@ class TheScene extends Physijs.Scene {
 
     instructions.innerHTML = "TotalScore : " + this.score + ", press the P key to play another game";
   }
-  
-  animate () {
+
+  animate() {
     this.simulate();
 
     if (moveForward) this.avatar.moveForward();
@@ -190,23 +194,23 @@ class TheScene extends Physijs.Scene {
     this.avatar.changeWeapon();
   }
 
-  getCamera () {
+  getCamera() {
     return this.camera;
   }
-  
-  getCameraControls () {
+
+  getCameraControls() {
     return this.controls;
   }
-  
-  setCameraAspect (anAspectRatio) {
+
+  setCameraAspect(anAspectRatio) {
     this.camera.aspect = anAspectRatio;
     this.camera.updateProjectionMatrix();
   }
-  
+
   newLevel() {
     this.avatar.setInitialPosition();
 
-    if(this.score - this.lastScore != 40)
+    if (this.score - this.lastScore != 40)
       this.score = this.lastScore + 40;
 
     this.updateLevel();
@@ -237,3 +241,4 @@ class TheScene extends Physijs.Scene {
   }
 
 }
+

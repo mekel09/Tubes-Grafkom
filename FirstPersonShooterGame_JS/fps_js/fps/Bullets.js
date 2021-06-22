@@ -37,7 +37,7 @@ class Bullets {
             scene.add(this.bullets[i]);
         }
     }
-
+    
     createObject(i) {
         var bullet = new Physijs.SphereMesh(new THREE.SphereGeometry(this.objWidth/4, 20,20), this.material, 50);
         bullet.position.set(i, -9.5, 0.0);
@@ -61,6 +61,22 @@ class Bullets {
 
         this.bullets[i].dirtyPosition = true;
         this.launched[i] = true;
+
+        var potensi = null;
+        var sound = null;
+
+        if (weapon == 0) {
+            potensi = 35000;
+            sound = new Howl({
+              src: [' '], volume: 0.1
+            });
+        }
+        else if (weapon == 1) {
+            potensi = 50000;
+            sound = new Howl({
+              src: [''], volume: 0.1
+            });
+        }
 
         var akhir = new THREE.Vector3(this.target[i].x*potensi, this.target[i].y*potensi, this.target[i].z*potensi);
         this.bullets[i].applyCentralImpulse( akhir );

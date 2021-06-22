@@ -5,11 +5,11 @@ class Map {
     this.map = [];
 
     var loader = new THREE.TextureLoader();
-    var texturMetal = loader.load ("imgs/metal.jpg");
-    var texturBase = loader.load("imgs/kerikil.jpg");
+    var texturMetal = loader.load ("imgs/SkyBox/ny.png");
+    var texturBase = loader.load("imgs/SkyBox/ny.png");
 
-    var mat = Physijs.createMaterial(new THREE.MeshPhongMaterial ({map: texturMetal}),0,0);
-    var matBase = Physijs.createMaterial(new THREE.MeshPhongMaterial ({map: texturBase}),0,0);
+    var mat = Physijs.createMaterial(new THREE.MeshPhongMaterial ({map: texturMetal, lightMapIntensity: 10}),0,0);
+    var matBase = Physijs.createMaterial(new THREE.MeshPhongMaterial ({map: texturBase, lightMapIntensity: 10}),0,0);
     
     var start1 = new Physijs.BoxMesh (new THREE.BoxGeometry (200, 0.0, 200, 1, 1, 1), mat, 0);
     start1.applyMatrix (new THREE.Matrix4().makeTranslation (0, 0, 0));
@@ -66,11 +66,15 @@ class Map {
     mountain.autoUpdateMatrix = false;
     this.map.push(mountain);
     ++this.map_size;
+
+
     return this;
   }
+
   getMap(i) {
     return this.map[i];
   }
+
   getMapSize() {
     return this.map_size;
   }
